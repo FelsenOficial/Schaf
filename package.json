@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "electron-store": "^8.0.1",
-    "react-router-dom": "^6.2.1"
+    "formik": "^2.2.9",
+    "react-router-dom": "^6.2.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",

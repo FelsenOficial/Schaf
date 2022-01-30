@@ -9,11 +9,12 @@ export function Home() {
   const location: locationDados = useLocation();
   const navigate = useNavigate();
   React.useEffect(() => {
+    console.log(location);
     setData(location.state.dados);
   }, [location.state.dados]);
 
   return (
-    <>
+    <section>
       <h1>
         Olá, <span>{data.usuario}</span>
       </h1>
@@ -27,6 +28,6 @@ export function Home() {
       >
         Sair
       </button>
-    </>
+    </section>
   );
 }

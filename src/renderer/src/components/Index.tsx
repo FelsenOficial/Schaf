@@ -1,45 +1,40 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object({
+  usuario: Yup.string().required('Usuário obrigatório'),
+  senha: Yup.string().required('Senha obrigatória'),
+});
 
 export function Index() {
   const navigate = useNavigate();
-  const [usuario, setUsuario] = React.useState();
-  const [senha, setSenha] = React.useState();
-  let [formDados, setFormDados] = React.useState({});
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    navigate('/Home', formDados);
+  const initialValues = {
+    usuario: '',
+    senha: '',
   };
 
-  const handleInputChange = (e: any) => {
-    if (e.target.id == 'usuario') {
-      setUsuario(e.target.value);
-      setSenha(senha);
-    }
-
-    if (e.target.id == 'senha') {
-      setUsuario(usuario);
-      setSenha(e.target.value);
-    }
-  };
-
-  React.useEffect(() => {
-    const formDadosNovo = {
-      state: {
-        dados: {
-          usuario: usuario,
-          senha: senha,
-        },
-      },
-    };
-    setFormDados(formDadosNovo);
-  }, [usuario, senha]);
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: async (dados: object) => {
+      try {
+        const login = {
+          state: {
+            dados,
+          },
+        };
+        navigate('/Home', login);
+      } catch (error) {
+        throw error;
+      }
+    },
+  });
 
   return (
     <div className="relative min-h-screen flex">
       <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-gray-900">
-        <div className="w-full h-full flex flex-auto items-center justify-center p-10 overflow-hidden text-white bg-no-repeat bg-cover relative">
+        <div className="w-full h-full flex flex-auto items-center justify-center p-10 overflow-hidden bg-no-repeat bg-cover relative">
           <div className="absolute bg-gradient-to-b from-cyan-500 to-cyan-400 opacity-75 inset-0 z-0"></div>
           <div
             className="w-full max-w-md z-10"
@@ -61,25 +56,39 @@ export function Index() {
                 </p>
               </div>
               <hr></hr>
-              <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+              <form className="mt-8 space-y-6" onSubmit={formik.handleSubmit}>
                 <div>
                   <input
                     className="text-gray-900 w-full text-base px-2 py-2 border-b border-gray-400 focus:outline-none focus:border-indigo-500 placeholder:text-gray-400"
                     type=""
                     placeholder="Digite o usuário"
+                    value={formik.values.usuario}
+                    onChange={formik.handleChange}
+                    name="usuario"
                     id="usuario"
-                    onChange={handleInputChange}
                   />
                 </div>
+                {formik.errors.usuario ? (
+                  <span className="p-1 pt-2 text-red-500 text-sm">
+                    {formik.errors.usuario}
+                  </span>
+                ) : null}
                 <div className="mt-8">
                   <input
                     className="text-gray-900 w-full text-base px-2 py-2 border-b border-gray-400 focus:outline-none focus:border-indigo-500 placeholder:text-gray-400"
                     type="password"
                     placeholder="Digite a senha"
+                    value={formik.values.senha}
+                    onChange={formik.handleChange}
+                    name="senha"
                     id="senha"
-                    onChange={handleInputChange}
                   />
                 </div>
+                {formik.errors.senha ? (
+                  <span className="p-1 pt-2 text-red-500 text-sm">
+                    {formik.errors.senha}
+                  </span>
+                ) : null}
                 <div>
                   <button
                     type="submit"
