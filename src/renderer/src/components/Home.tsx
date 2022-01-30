@@ -9,10 +9,12 @@ export function Home() {
   const location: locationDados = useLocation();
   const navigate = useNavigate();
   React.useEffect(() => {
-    console.log(location);
     setData(location.state.dados);
   }, [location.state.dados]);
 
+  React.useEffect(() => {
+    document.title = `Home - ${data.usuario}`;
+  }, [data]);
   return (
     <section>
       <h1>

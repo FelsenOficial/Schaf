@@ -1,35 +1,7 @@
-import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-
-const validationSchema = Yup.object({
-  usuario: Yup.string().required('Usuário obrigatório'),
-  senha: Yup.string().required('Senha obrigatória'),
-});
+import { LoginHooks } from '@/hooks/LoginHooks';
 
 export function Index() {
-  const navigate = useNavigate();
-  const initialValues = {
-    usuario: '',
-    senha: '',
-  };
-
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit: async (dados: object) => {
-      try {
-        const login = {
-          state: {
-            dados,
-          },
-        };
-        navigate('/Home', login);
-      } catch (error) {
-        throw error;
-      }
-    },
-  });
+  const { formik } = LoginHooks();
 
   return (
     <div className="relative min-h-screen flex">
