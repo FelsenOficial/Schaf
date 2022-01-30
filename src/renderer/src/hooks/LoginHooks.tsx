@@ -1,9 +1,15 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 export const LoginHooks = () => {
+  const [borderErrorUsuario, setBorderErrorUsuario] = React.useState({
+    borderBottom: '',
+  });
+  const [borderErrorSenha, setBorderErrorSenha] = React.useState({
+    borderBottom: '',
+  });
   const validationSchema = Yup.object({
     usuario: Yup.string().required('Usuário obrigatório'),
     senha: Yup.string().required('Senha obrigatória'),
@@ -31,9 +37,26 @@ export const LoginHooks = () => {
       }
     },
   });
+
+  React.useEffect(() => {
+    if (formik.errors.usuario) {
+      setBorderErrorUsuario({ borderBottom: '1px solid red' });
+    } else {
+      setBorderErrorUsuario({ borderBottom: '' });
+    }
+  }, [formik.errors.usuario]);
+
+  React.useEffect(() => {
+    if (formik.errors.senha) {
+      setBorderErrorSenha({ borderBottom: '1px solid red' });
+    } else {
+      setBorderErrorSenha({ borderBottom: '' });
+    }
+  }, [formik.errors.senha]);
+
   return {
-    validationSchema,
-    initialValues,
     formik,
+    borderErrorUsuario,
+    borderErrorSenha,
   };
 };

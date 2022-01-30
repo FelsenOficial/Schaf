@@ -1,8 +1,7 @@
 import { LoginHooks } from '@/hooks/LoginHooks';
 
 export function Index() {
-  const { formik } = LoginHooks();
-
+  const { formik, borderErrorUsuario, borderErrorSenha } = LoginHooks();
   return (
     <div className="relative min-h-screen flex">
       <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-gray-900">
@@ -31,6 +30,7 @@ export function Index() {
               <form className="mt-8 space-y-6" onSubmit={formik.handleSubmit}>
                 <div>
                   <input
+                    style={borderErrorUsuario}
                     className="text-gray-900 w-full text-base px-2 py-2 border-b border-gray-400 focus:outline-none focus:border-indigo-500 placeholder:text-gray-400"
                     type=""
                     placeholder="Digite o usuário"
@@ -41,12 +41,13 @@ export function Index() {
                   />
                 </div>
                 {formik.errors.usuario ? (
-                  <span className="p-1 pt-2 text-red-500 text-sm">
+                  <span className="p-1 pt-2 text-red-500 text-sm bt-">
                     {formik.errors.usuario}
                   </span>
                 ) : null}
                 <div className="mt-8">
                   <input
+                    style={borderErrorSenha}
                     className="text-gray-900 w-full text-base px-2 py-2 border-b border-gray-400 focus:outline-none focus:border-indigo-500 placeholder:text-gray-400"
                     type="password"
                     placeholder="Digite a senha"
