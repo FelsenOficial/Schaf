@@ -1,7 +1,7 @@
 import { LoginHooks } from '@/hooks/LoginHooks';
 
-export function Index() {
-  const { formik, borderErrorUsuario, borderErrorSenha } = LoginHooks();
+export function Login() {
+  const { formik, border } = LoginHooks();
   return (
     <div className="relative min-h-screen flex">
       <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-gray-900">
@@ -10,7 +10,6 @@ export function Index() {
           <div
             className="w-full max-w-md z-10"
             style={{
-              background: "url('imageslogin_bg.svg')",
               boxShadow: '0 2px 6px rgb(0 0 0 / 20%)',
             }}
           >
@@ -21,16 +20,17 @@ export function Index() {
                 </h2>
                 <p className="font-bold text-black text-lg">
                   Bem vindo(a)!
-                  <p className="mt-2 text-sm text-gray-500">
+                  <br></br>
+                  <span className="mt-2 text-sm text-gray-500">
                     Insira suas credenciais para acessar
-                  </p>
+                  </span>
                 </p>
               </div>
               <hr></hr>
               <form className="mt-8 space-y-6" onSubmit={formik.handleSubmit}>
                 <div>
                   <input
-                    style={borderErrorUsuario}
+                    style={border.borderErrorUsuario}
                     className="text-gray-900 w-full text-base px-2 py-2 border-b border-gray-400 focus:outline-none focus:border-indigo-500 placeholder:text-gray-400"
                     type=""
                     placeholder="Digite o usuário"
@@ -47,7 +47,7 @@ export function Index() {
                 ) : null}
                 <div className="mt-8">
                   <input
-                    style={borderErrorSenha}
+                    style={border.borderErrorSenha}
                     className="text-gray-900 w-full text-base px-2 py-2 border-b border-gray-400 focus:outline-none focus:border-indigo-500 placeholder:text-gray-400"
                     type="password"
                     placeholder="Digite a senha"
@@ -79,9 +79,7 @@ export function Index() {
                       Redefinir Senha
                     </a>
                   </div>
-                  <span className="p-3">
-                    <span className=""></span>
-                  </span>
+                  <span className="p-3"></span>
                   <div className="p-3">
                     <a
                       href="#"

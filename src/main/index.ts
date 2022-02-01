@@ -1,7 +1,7 @@
 import os from 'os'
 import { join } from 'path'
 import { app, BrowserWindow } from 'electron'
-import './samples/electron-store'
+// import './samples/electron-store'
 
 const isWin7 = os.release().startsWith('6.1')
 if (isWin7) app.disableHardwareAcceleration()
@@ -29,6 +29,8 @@ async function createWindow() {
 
     win.loadURL(url)
     win.webContents.openDevTools()
+    win.removeMenu()
+    win.maximize()
   }
 
   // Test active push message to Renderer-process.

@@ -56,7 +56,9 @@ export const LoginHooks = () => {
 
   return {
     formik,
-    borderErrorUsuario,
-    borderErrorSenha,
+    border: {
+      borderErrorUsuario,
+      borderErrorSenha,
+    }
   };
 };
