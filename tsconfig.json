@@ -1,0 +1,19 @@
+{
+  "extends": "./paths.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "target": "es2016",
+    "module": "commonjs",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "strict": false,
+    "jsx": "react-jsx",
+    "typeRoots": ["./@types"]
+  }
+}
